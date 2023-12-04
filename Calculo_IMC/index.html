@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body {
+            background-image: url("img.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 5px;
+            background-color: lightblue;
+            width: 600px;
+            padding: 30px;
+            margin-left: 100px;
+            margin-top: 300px;
+            border-radius: 50px;
+            font-size: 50px;
+        }
+
+        .div1 {
+            grid-area: 1 / 1 / 2 / 2;
+            text-align: right;
+        }
+
+        .div2 {
+            grid-area: 1 / 2 / 2 / 3;
+        }
+        .div2 input[type='text']{
+            font-size: 50px;
+            padding: 10px;
+            width: 250px;
+            border: 1 solid black;
+            border-radius: 20px;
+        }
+
+        .div3 {
+            grid-area: 2 / 1 / 3 / 2;
+            text-align: right;
+        }
+
+        .div4 {
+            grid-area: 2 / 2 / 3 / 3;
+        }
+
+        .div4 input[type='text']{
+            font-size: 50px;
+            padding: 10px;
+            width: 250px;
+            border: 1 solid black;
+            border-radius: 20px;
+        }
+
+        .div5 {
+            grid-area: 3 / 1 / 4 / 3;
+        }
+
+        .div5 input[type='button'] {
+            width: 600px;
+            font-size: 50px;
+            background-color: blue;
+            color: white;
+            border-radius: 100px;
+        }
+
+        .div5 input[type='button']:hover{
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <button></button>
+    <input type="button">
+    <div class="content">
+
+        <div class="parent">
+
+            <div class="div1">
+                <label for="inputAltura">Altura:</label>
+            </div>
+            <div class="div2">
+                <input type="text" id="inputAltura" class="altura">
+            </div>
+            <div class="div3">
+                <label for="inputPeso">Peso:</label>
+            </div>
+            <div class="div4">
+                <input type="text" id="inputPeso" class="peso">
+            </div>
+            <div class="div5">
+                <input type="button" onclick="imc_calculo()" value="chamar">
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let altura = document.querySelector(".altura");
+        let peso = document.querySelector(".peso");
+
+        function imc_calculo() {
+            let alturaVal = parseFloat(altura.value);
+            let pesoVal = parseFloat(peso.value);
+
+            if (!isNaN(alturaVal) && !isNaN(pesoVal) && alturaVal > 0 && pesoVal > 0) {
+                let resultado = pesoVal / (alturaVal * alturaVal);
+                alert("Seu IMC é: " + resultado.toFixed(2));
+
+                if (resultado < 18.5) {
+                    alert("Abaixo do peso");
+                } else if (resultado >= 18.5 && resultado <= 24.9) {
+                    alert("Peso ideal (parabéns)");
+                } else if (resultado >= 25.0 && resultado <= 29.9) {
+                    alert("Levemente acima do peso");
+                } else if (resultado >= 30.0 && resultado <= 34.9) {
+                    alert("Obesidade grau I");
+                } else if (resultado >= 35.0 && resultado <= 39.9) {
+                    alert("Obesidade grau II (severa)");
+                } else if (resultado >= 40) {
+                    alert("Obesidade grau III (mórbida)");
+                } else {
+                    alert("Classificação não encontrada para o IMC fornecido.");
+                }
+            } else {
+                alert("Por favor, insira valores válidos para peso e altura.");
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
